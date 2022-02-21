@@ -4,6 +4,8 @@
 ![cover](img/cover.jpg)
 <span>Photo by <a href="https://unsplash.com/@ravi_roshan_inc?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Ravi Roshan</a> on <a href="https://unsplash.com/s/photos/life?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
 
+[![RubyCritic](badges/rubycritic_badge_score.svg)]
+
 ## Pre-requisitos
 Para evaluar tu código e identificar posibles mejoras debes instalar y utilizar las siguientes herramientas:
 - [Rubocop](https://brightcoder.gitbook.io/handbook/recursos/ruby-on-rails/rubocop)
