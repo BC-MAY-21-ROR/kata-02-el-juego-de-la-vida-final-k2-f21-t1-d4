@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 require 'rspec'
-require_relative '../cell.rb'
-require_relative '../template.rb'
+require_relative '../app/cell'
+require_relative '../app/template'
 
 describe Cell do
   
-  grid = [[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 1, 0, 0, 0], [0, 0, 0, 1, 1, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0]]
+  new_grid = [[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 1, 0, 0, 0], [0, 0, 0, 1, 1, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0]]
 
   it 'check generate cells' do
     grid = Template.new(4, 8)
@@ -16,15 +16,15 @@ describe Cell do
   end
 
   it 'check count neighbours' do
-    cell = Cell.new(grid)
+    cell = Cell.new(new_grid)
     expect(cell.count_neighbors.sum).to eq 24
   end
 
   it 'check live or die' do
-    cell = Cell.new(grid)
+    cell = Cell.new(new_grid)
     cell.count_neighbors
     cell.lives_or_dies
-    expect(grid).to eq([[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 1, 1, 0, 0, 0], [0, 0, 0, 1, 1, 0, 0, 0],
+    expect(new_grid).to eq([[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 1, 1, 0, 0, 0], [0, 0, 0, 1, 1, 0, 0, 0],
                         [0, 0, 0, 0, 0, 0, 0, 0]])
   end
 end

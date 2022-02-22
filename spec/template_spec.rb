@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'rspec'
-require_relative '../template'
+require_relative '../app/template'
 
 describe Template do
   it 'check grid size' do

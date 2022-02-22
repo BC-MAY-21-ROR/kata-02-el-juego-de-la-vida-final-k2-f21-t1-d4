@@ -8,4 +8,5 @@ gem 'rubycritic'
 gem 'rake'
 gem 'rubycritic-small-badge', :require => false
 gem 'rexml'
+gem 'sandi_meter'
 # gem "rails"
