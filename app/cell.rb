@@ -8,6 +8,8 @@ class Cell
     @grid = grid
   end
 
+  attr_accessor :grid;
+  
   def generate_cells
     @grid.each.with_index do |row, ri|
       row.each.with_index do |_column, ci|

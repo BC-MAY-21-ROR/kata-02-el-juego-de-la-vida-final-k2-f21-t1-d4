@@ -47,7 +47,7 @@
     <div class="file-time">
       <span class="committed-at">
         
-          Never committed
+          Updated <time class='js-timeago' datetime='2022-02-21 19:16:27 -0500'>2022-02-21 19:16:27 -0500</time>
         
       </span>
     </div>
@@ -62,22 +62,22 @@
       <div class="col-md-8">
         <div class="row">
           <div class="col-md-1">
-            <div class="rating b big">
-              B
+            <div class="rating c big">
+              C
             </div>
           </div>
           <div class="code-statistics col-md-11">
             <div class="col-md-3">
-              <div><span class="metric">40</span><small> lines of codes</small></div>
+              <div><span class="metric">76</span><small> lines of codes</small></div>
               <div><span class="metric">0</span><small> methods</small></div>
             </div>
             <div class="col-md-3">
               <div><span class="metric">N/A</span><small> complexity/method</small></div>
-              <div><span class="metric">0</span><small> churn</small></div>
+              <div><span class="metric">2</span><small> churn</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">40.65</span><small> complexity</small></div>
-              <div><span class="metric">74</span><small> duplications</small></div>
+              <div><span class="metric">86.71</span><small> complexity</small></div>
+              <div><span class="metric">76</span><small> duplications</small></div>
             </div>
           </div>
         </div>
@@ -100,37 +100,73 @@
     <code class="prettyprint linenums lang-ruby file-code js-file-code"># frozen_string_literal: true
 
 require &#39;rspec&#39;
-require_relative &#39;../cell.rb&#39;
-require_relative &#39;../template.rb&#39;
+require_relative &#39;../app/cell&#39;
+require_relative &#39;../app/template&#39;
 
 describe Cell do
   
-  grid = [[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 1, 0, 0, 0], [0, 0, 0, 1, 1, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0]]<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="cell_spec.html#L9" class="js-smell-location">0</a>                  <a href="cell_spec.html#L27" class="js-smell-location">1</a>                  </div>  </li></ol>
-
-  it &#39;check generate cells&#39; do
-    grid = Template.new(4, 8)
-    cell = Cell.new(grid.grid)
-    cell.generate_cells
-    expect(grid.one_line_grid.include?(1)).to eq true
+  before(:all) do
+    @new_grid = [[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 1, 0, 0, 0], [0, 0, 0, 1, 1, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0]]
   end
 
-  it &#39;check count neighbours&#39; do
-    cell = Cell.new(grid)
-    expect(cell.count_neighbors.sum).to eq 24
+  describe &#39;generate_cells&#39; do
+
+    it &#39;check generate cells&#39; do
+      grid = Template.new(4, 8)
+      cell = Cell.new(grid.grid)
+      cell.generate_cells
+      expect(grid.one_line_grid.include?(1)).to eq true
+    end
+
   end
 
-  it &#39;check live or die&#39; do
-    cell = Cell.new(grid)
-    cell.count_neighbors
-    cell.lives_or_dies
-    expect(grid).to eq([[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 1, 1, 0, 0, 0], [0, 0, 0, 1, 1, 0, 0, 0],<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="cell_spec.html#L9" class="js-smell-location">0</a>                  <a href="cell_spec.html#L27" class="js-smell-location">1</a>                  </div>  </li></ol>
-                        [0, 0, 0, 0, 0, 0, 0, 0]])
+  describe &#39;count_neighbors&#39; do
+    
+    it &#39;check count neighbours&#39; do
+      cell = Cell.new(@new_grid)
+      expect(cell.count_neighbors.sum).to eq 24
+    end
+    
+    it &#39;should be count correctly the neighbors&#39; do
+      cell = Cell.new(@new_grid)
+      print @new_grid
+      neighbors = cell.count_neighbors
+      expect(neighbors.to_a).to eq([[0, 0, 0, 1, 1, 1, 0, 0], [0, 0, 1, 3, 2, 2, 0, 0], [0, 0, 1, 2, 2, 2, 0, 0], [0, 0, 1, 2, 2, 1, 0, 0]])<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="cell_spec.html#L35" class="js-smell-location">0</a>                  <a href="cell_spec.html#L46" class="js-smell-location">1</a>                  </div>  </li></ol>
+    end
+
   end
+
+  describe &#39;lives_or_dies&#39; do
+
+    it &#39;check live or die&#39; do
+      cell = Cell.new(@new_grid)
+      cell.count_neighbors
+      cell.lives_or_dies
+      expect(@new_grid).to eq([[0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 1, 1, 0, 0, 0], [0, 0, 0, 1, 1, 0, 0, 0],<ol class="nocode errors smells">  <li>    <div class="description">      <div class="heading">        <span>          <i class="fa fa-warning" aria-hidden="true"></i>          <a href="http://docs.seattlerb.org/flay/" target="_blank"><b>DuplicateCode</b></a>        </span>      </div>      <span>Similar code found in 2 nodes</span>              <span>Locations:</span>                  <a href="cell_spec.html#L35" class="js-smell-location">0</a>                  <a href="cell_spec.html#L46" class="js-smell-location">1</a>                  </div>  </li></ol>
+                              [0, 0, 0, 0, 0, 0, 0, 0]])
+    end
+
+  end
+
+  describe &#39;change_value&#39; do
+
+    it &#39;should be the new value&#39; do
+      cell = Cell.new(@new_grid)
+      cell.change_value(2, 2, 1)
+      expect(cell.grid[2][2]).to eq(1)
+    end
+
+  end
+
 end
+# 00000000
+# 00001000
+# 00011000 
+# 00000000
 
 # 00000000
 # 00000100
-# 00001100
+# 00001100 
 # 00000000
 
 # 00001110
