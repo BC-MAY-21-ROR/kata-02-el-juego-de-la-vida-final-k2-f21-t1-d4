@@ -68,7 +68,7 @@
           </div>
           <div class="code-statistics col-md-11">
             <div class="col-md-3">
-              <div><span class="metric">22</span><small> lines of codes</small></div>
+              <div><span class="metric">33</span><small> lines of codes</small></div>
               <div><span class="metric">0</span><small> methods</small></div>
             </div>
             <div class="col-md-3">
@@ -76,7 +76,7 @@
               <div><span class="metric">2</span><small> churn</small></div>
             </div>
             <div class="col-md-3">
-              <div><span class="metric">40.87</span><small> complexity</small></div>
+              <div><span class="metric">45.13</span><small> complexity</small></div>
               <div><span class="metric">0</span><small> duplications</small></div>
             </div>
           </div>
@@ -101,23 +101,34 @@
 
 require &#39;rspec&#39;
 require_relative &#39;../app/template&#39;
+require_relative &#39;../app/cell&#39;
 
 describe Template do
-  it &#39;check grid size&#39; do
-    template = Template.new(3, 8)
-    template.generate
-    expect(template.one_line_grid.size).to eq 24
+
+  describe &#39;one_line_grid&#39; do
+    
+    it &#39;check grid size&#39; do
+      template = Template.new(3, 8)
+      template.generate
+      expect(template.one_line_grid.size).to eq 24
+    end
+
   end
 
-  it &#39;check grid size of column&#39; do
-    template = Template.new(3, 8)
-    expect(template.generate[0].size).to eq 8
+  describe &#39;generate&#39; do
+    
+    it &#39;check grid size of column&#39; do
+      template = Template.new(3, 8)
+      expect(template.generate[0].size).to eq 8
+    end
+
+    it &#39;check grid size of rows&#39; do
+      template = Template.new(3, 8)
+      expect(template.generate.size).to eq 3
+    end
+    
   end
 
-  it &#39;check grid size of rows&#39; do
-    template = Template.new(3, 8)
-    expect(template.generate.size).to eq 3
-  end
 end
 </code>
   </div>
